@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remi AI — Your AI. Your Ideas. Your Possibilities.</title>
+<style>
+:root{--bg:#050b1b;--panel:#0c1730;--line:#263b65;--blue:#36baff;--purple:#8065ff;--muted:#a5b5d1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:radial-gradient(ellipse at 55% 0%,#14285b 0%,var(--bg) 55%);color:#fff;min-height:100vh}
+button,textarea{font:inherit}button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:245px;flex-shrink:0;background:#080f23;border-right:1px solid var(--line);padding:22px 15px;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;align-items:center;gap:11px;font-size:23px;font-weight:800}
+.brand-name span{color:var(--blue)}
+.logo{width:48px;height:48px;object-fit:cover;border-radius:12px;display:block}
+.newchat,.send,.generate{border:0;color:#fff;font-weight:bold;background:linear-gradient(110deg,#168fe5,#7958f5);border-radius:11px;padding:13px}
+.side-label{font-size:11px;color:#8093b5;letter-spacing:1.5px}
+.side-text{font-size:13px;color:#aab9d3;line-height:1.8}
+.side-bottom{margin-top:auto;border-top:1px solid var(--line);padding-top:18px}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+header{height:66px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px;background:#09132add}
+.online{font-size:12px;color:#66e0a7}
+.content{width:min(900px,100%);margin:auto;padding:35px 20px;flex:1}
+.hero{text-align:center;margin:15px 0 28px}
+.hero .logo{width:128px;height:128px;object-fit:cover;border-radius:25px;margin:0 auto 18px;box-shadow:0 0 35px #287cff44}
+.hero h1{font-size:clamp(30px,5vw,43px);margin-bottom:12px}
+.hero h1 span{background:linear-gradient(90deg,#43c5ff,#a27cff);background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:15px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:25px 0}
+.card{background:#101d3b;border:1px solid #293e69;border-radius:13px;padding:16px;text-align:left;color:white}
+.card:hover{border-color:var(--blue)}
+.card strong{display:block;margin-bottom:7px;font-size:14px}
+.card small{color:#a6b6d1;line-height:1.5}
+.chat{background:#0b1731;border:1px solid #293e69;border-radius:16px;min-height:280px;max-height:48vh;overflow-y:auto;padding:18px}
+.empty{text-align:center;color:#91a4c5;padding:75px 10px;font-size:14px}
+.empty strong{display:block;color:#fff;font-size:17px;margin-bottom:9px}
+.message{display:flex;gap:10px;margin-bottom:17px;align-items:flex-start}
+.avatar{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:#174b80;display:grid;place-items:center;font-weight:bold}
+.user .avatar{background:#6049b8}
+.bubble{background:#14294c;border:1px solid #2b4772;border-radius:4px 13px 13px 13px;padding:12px 14px;line-height:1.6;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;max-width:90%}
+.user .bubble{background:#1b3565}
+.composer{margin-top:14px;background:#0c1933;border:1px solid #344c75;border-radius:15px;padding:12px}
+#question{width:100%;min-height:65px;max-height:150px;resize:vertical;border:0;outline:0;background:transparent;color:white;padding:8px}
+#question::placeholder{color:#8597b7}
+.composer-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.hint{font-size:11px;color:#8395b4}
+.tools{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.tool{background:#112344;border:1px solid #304b74;border-radius:10px;padding:11px 14px;color:#d9e8ff}
+.image-panel{display:none;margin-top:15px;background:#0c1933;border:1px solid #304b74;border-radius:15px;padding:17px}
+.image-panel h3{margin-bottom:13px}
+#imagePrompt{width:100%;min-height:90px;background:#071127;border:1px solid #304b74;border-radius:10px;padding:12px;color:white;resize:vertical}
+#imageResult{margin-top:15px;color:#a8bad7;font-size:13px}
+#imageResult img{max-width:100%;border-radius:12px}
+footer{text-align:center;color:#7185a8;font-size:12px;padding:20px}
+@media(max-width:720px){.sidebar{display:none}.content{padding:23px 13px}header{padding:0 15px}.cards{grid-template-columns:1fr}.chat{max-height:45vh}.hint{max-width:65%}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">
+    <img class="logo" data-remi-logo alt="Official Remi AI logo">
+    <div class="brand-name">Remi <span>AI</span></div>
+  </div>
+  <button class="newchat" onclick="newChat()">＋ New Chat</button>
+  <div><div class="side-label">YOUR AI ASSISTANT</div>
+    <p class="side-text">Ask questions, discover ideas and explore new possibilities with Remi AI.</p>
+  </div>
+  <div><div class="side-label">FEATURES</div>
+    <p class="side-text">✦ AI Chat<br><br>✦ Image Creation<br><br>✦ Ask Anything</p>
+  </div>
+  <div class="side-bottom"><p class="side-text">Your AI. Your Ideas.<br>Your Possibilities.</p></div>
+</aside>
+
+<section class="main">
+<header>
+  <div class="brand-name">Remi <span>AI</span></div>
+  <div class="online">● AI ASSISTANT</div>
+</header>
+
+<main class="content">
+  <section class="hero">
+    <img class="logo" data-remi-logo alt="Official Remi AI logo">
+    <h1>Welcome to <span>Remi AI</span></h1>
+    <p>Your AI. Your Ideas. Your Possibilities.</p>
+  </section>
+
+  <section class="cards" id="cards">
+    <button class="card" onclick="choose('Explain a difficult topic in simple words.')"><strong>📚 Learn something</strong><small>Understand any topic with simple explanations.</small></button>
+    <button class="card" onclick="choose('Give me creative ideas for a new project.')"><strong>💡 Get creative ideas</strong><small>Discover ideas and inspiration.</small></button>
+    <button class="card" onclick="choose('Help me write a professional paragraph.')"><strong>✍️ Help me write</strong><small>Improve your writing and communication.</small></button>
+    <button class="card" onclick="choose('Give me a step-by-step solution to a problem.')"><strong>🚀 Solve a problem</strong><small>Work through problems step by step.</small></button>
+  </section>
+
+  <section class="chat" id="chat">
+    <div class="empty" id="empty"><strong>Your conversation starts here.</strong>Ask Remi AI anything you want.</div>
+  </section>
+
+  <section class="composer">
+    <textarea id="question" placeholder="Message Remi AI..."></textarea>
+    <div class="composer-bottom">
+      <span class="hint">Enter to send · Shift + Enter for a new line</span>
+      <button class="send" id="send" onclick="sendMessage()">Send ↑</button>
+    </div>
+  </section>
+
+  <div class="tools">
+    <button class="tool" onclick="toggleImage()">✦ Create Image</button>
+    <button class="tool" onclick="newChat()">＋ New Conversation</button>
+  </div>
+
+  <section class="image-panel" id="imagePanel">
+    <h3>✦ Remi AI Image Creator</h3>
+    <textarea id="imagePrompt" placeholder="Describe the image you want to create..."></textarea>
+    <br><br><button class="generate" onclick="generateImage()">Generate Image</button>
+    <div id="imageResult"></div>
+  </section>
+</main>
+<footer>Remi AI © 2026 · Founded by Mohamed Shaahiq</footer>
+</section>
+</div>
+
+<script>
+// YOUR ACTUAL REMI AI LOGO IS EMBEDDED HERE.
+// No separate logo file is required.
+const REMI_LOGO = "data:image/webp;base64,UklGRggNAABXRUJQVlA4IPwMAABwUQCdASpAAUABPt1ur1IopqmnpbQZQTAbiWNu/BTOxUf5iYNOC9t/+d007zeo2hj327YO95DWZLn18x3cAkufKK2689aS4Pfqx2ZwLq4dcGQH04ro/8xZoU22dRAUswrfVwZKqJlj+14xWYx8MUV///InCevnCv139UNy9nTtS9Yf6LYR7eAnMavIj6skPOc6+H8io4kyPrCMhIS2wps7UErV76aOwxhvXJqS7+M6tHg9iqQ+DVYQOXIEAZfLvUIFDXMppaWH67yW3uc/dILBY1TeOF6ilvuZu+aExwfWjF2oHxNTt31r7nC4Wa2bkOV5fRjzevvPmOdogolqIc5y7UCbquuHHDVIUjKypDok6YeSz+crTqiWyvn2AUdXnSpIHr23/hKfUEM8//9tTAmXNiRUPBg6qUaaAlS9Z6yEZcjoni/X43xTZnvv9Cjs9lJxW0rfCdibLRPld1D0EL7vqsUr9aFw0iRbaC5erThWDjAc/1j1OZ8Isbm8hAMHLtU46HRJi0iSjXRWvsLtzhd/q6yciGdjqznId775ePWlPNC+g4a8TfXqyNwi4zcsp/UCleYHA5Cop3iesAJKvpcOZRoBUf6f0fLXlosv6PqGYcR5FNwn23/PSo86BvAG0fRiy9hia+0Mxs7R67OlKwk4DhVo/EFQMiHRUuk85V/dWZA7VK/pq4MpYuqIDSf+4n12eyNVXZOI3a6/YvC2PfN5MtOYK5UQIvsyc8UDHoda9AXc6yQ0XQNffmW8t5mZOOcX793cHLo7bQ8+BgzIGsqh2dyDvjf8cXOJ+2cc0tNV++ho10L9yw71xyXzTlDP9dnp8VXMkFj2MAzeZELEKEC5YhzyvWUNCYYLb2oaeF0emU6BKQAA/vRRSR9btDVtvAJVDN0HXgHKlh34XnPHZGvbG1VYVS5ve0Ji2pJyjbNs/clwtXauBTTToV6TMzLnaR8wEtJmlgl/NGjbLioRkCRb14CJvilC23UHGvlKYaAhPCgAFRwDQv3buE0aE/xSRNMLQSpLqJkG94GbR7alOw5zMh7vtB1+ZlhYnA3g8sllxbuXWczcT5xZAK0j9V+ps0I+8JtoLNlJNnP38s5PK0Cf2xl6E+DOCLYjIOHLggu/PsKUiXjnVTbB0vFIIqwFy9aIOU7hgLTI37HhOQFcOJH1kteAKFBjlJfWOtEn+xZf7rjI1dPBeSplZnpjSyQerfHsZfrrCdqOlqu19AskL9x5Biw8zesLMjqoVQihql9+HNR4gA5b7cywnQl7OFP4Mq0cUQp5Myd+XF3aoC6BjS14W+6girK7bRF89v6OWz7zMtYhksEiLcBoaZs+zlnUyuqSAyapABK/FPcr+AJThFlY7+smyvMuXMGaYf5xwPq3EA9mMGZW+uljE4+nYmOqhFewkr44Tw29HvmAqweIyQIPszbQ96wHMc32KAibq4lOEyebjTNz3A27Mairj/qiJP86gq9CEJiIbvXxbcO2dU0PcG7bES2jzSEnjf0Tr/fmkxvpnP9WNd6hwMDNKXsBaDesD06fHiuajk0FHAuMkNapa9OwFgyXxshAD7aiTeWTJJ/H/306SvFOzWqW0jRQ+z1K1v1JV9OIcxR+Ffn4ypoWfk8md+I8yN1bdOBtZecQM+turpKj6/BLVMbxlPmMWNLYT1o5lAYe3w+1hR/4gIcbiCOFeScDNUdavhyP+OqWVRonmzjVrKbMpf3cO+97k2RNlZ7wwRUOSwZlaja8E8joV0yajK+Q+aVmPZkIHDD2ok1pu/Tcwmlr5Jgmo7N9AZpIb9wwVq+z5IwejQKw334hsEhZsMnPOY1DULqTzSCPV56PcyuiF4Nxqjg3QD3VjjMi1EJhNV7PyFhMPhd0sCPLwZCcyJfEh/hlBNrQXSQxG45m0yrfvuZEU+zCl/GYa1AP2+YolIzeF8bd/RS55ZGKkqMrLvXNhNj1s+FdQ18PZy2ekArOpqbDnenWN0vjhZeRtUEqdfWLHWC+JoZRb31+Ig0nhkMlRH7+je/ReJpDuQTbA8CATcEhp4nd4dUeTYVAD1iUwP9uq9KGkMHjyZK/qyTx5lVurQGeeKCcVKV8+NLK9JFqDgZbXOS+oDwBi2Od6Yl0CxZ4gWkpr1zpOOthsidoofTXIWDdou3QOa95EmcCymDvyzW1LRkb44GQ8o8nAc53k+srbCM4fNyhvTY/ghnp588rykYOMwCI/dv8Ytvyyj8XgE7QvN2pqZbOHeL0/uq9XFqORf+qG912qs1qfUoXKL2qaB0uR31SirPEB5Uw7oemmTTEY+5vpaYTqkWS15glHM6W2PNNxMK5GgYt+iFx3eOrzn0JFWUvBNJ3U1wz/c91mwTASnH1caYh6bp8UFdXc5Snr4JK6ZTuW//i6AO22fxXN193vcG/HxttPDu7qY1we9noN9FqCwZcSYd3Qgtq2FatT7Xc+QQEuHDA78riZUFUy47kd81Yk4UEaOk8u5duDRyIIAUvlvzKa5JsdrMh5aRgb9eEdgQy+OgBhWWgfXX5ORF//h3ZHzT6v1PMmqqwHRekpdVk/ChdmDBy2cBmpmC9X2NsnXo0q5AT6DKWQO98HZLWBseVAqhzG4lF0Fa7UAZGXoF1wuVbz42iqfcjDhncLwQqS3AbFOpgQqIAdTfE2+Tx5Apah0s5/a0G4PzzkIg8B3CppNwmX5pK5YktoxXu4DB6N5dwq1f3ByhSfn4A2xXKl6EA34Ugj2uv0gylIftNGaq+KwaQtod9B/b5ioA8ygI4C84bJ9YRdaGqvHGtYFKJgKc6LNac0CrMtL/rUbqawgJ57O481NVFY5J++LfAdVCP3P79jy9kxzqQ6uJ57fgde7uNrzMRaKIm3vB9dzy40kR+I8FTuPWbhN9XG1aWVYgdGG8RY2c8aiT98ibQP5mdnup8xUiz1fkZdFCiXaYs38KfLgqhVr/UgDXsBSuQh6wUsDgbEUEfdSi9y6s/jTOPY6ALQoMfUNyrKi8he6XGSDu0dn/SM3xSKYV8kHs3835ulEZnkiwiHBwY0hAatuo/yh3QtFGG2SUSlNMjCYPMCL3HMj5F8NglTUeQYyX7zYqQafuJGlvkU5h0drR6lJo128KZe5P98QNk9aPnN76FvMomJMwIzGAQq+wPW6hPlAoi6vuMZPjw2jYdnBZKCw8girn2Bd1gtovZViriTJJqNNk6M4Am0mowAcEJLhvV2/YI9aumVCFxmbCg4EPE7f9iB5yCGwcFpAhrupIwkxUTNVkdv4rxORvPhlWQKmLKp8A95qHXq6VnEZxuu9oaVyx4IQ0mLIROuFUwmmg1lHqrnC6wFWFz+Yat6j218ZPcfREEUWz+JGMF3uwgD0Loa4f5ZaH+oby7Q7l1kEKkBkaFpFjMOgCSKYmWrGtR42RC3YIErvcV/jigN6Uw7TkFrHZWAWNsXuIh9ff3eDkosMNJys0/Rw+a738PLvSlXNQt6qvdILeQJxjw5tHFn2nknsUSP9F5A3qZmiLCHEvb5mL2KnCbhx1pmVhnU8VdttjIuB/elRsWWz7WTzF3Mjp8nWN2kG170pFcvDSjorVDjFBT2F7rHVe3rgXVxMdlszyyfvi0jdJErhTWWgjjeum3OGk0SkbMOZbCGLSnXeoRgWixS9rnubTudMuJ5sK4N7cT/p/IXGYeAkfLQZWO9NjEUOjcOw+rWcTrL3KNBQJBRgOQZ8btW4MKRme+vJ+iJeCXFFUwBUGj+IYFUd3XJGW4iU0B1DgrG+FxQZuZTUEDvL21Zw1eZfHkFWztgaKStFkXky7x2JsxUvA990vv9rmO/6MEdiztKg/dZ+4Fx70NcAhgVFwTVlTQJJtV8dfUNg7nyBYiU8yRSpAAVsN8A7BCQVYAuGqNkxM/+GDCajWGzkTgt1eRA7VyVNV607WuhHIQcQur4JLiUqLRDnznrHttbgb05rfku7Li9YTzC+D+mRWNbqrx9r5NF+n6sg1aqOrUYRGJ2CoRHDInCPXRrWOtXsyGQ6k78CYzJn9PYaIniIvSUa+OZGSQY+8BRkwndVUxrKgpRlMlMbRjYcVyfLYh5IBwUzvm/msPOpI7cO6SeMqcG4Vej4rREwQh/qQOwokLMwIirD5peigBepe/BSUxi7hvNL7N6UBcrCzh3sP45YKG+vVeevIfjeruY6tO0zFVIJGJHhRTHzuMtpf05MZusDcA2q0h6/JSjTQZJdYGlGnIUQg4DRnih0g6jLPm2PIj4hkGq1qDgEsqOIKrT62yYznkrqrb6Vp8PnnLrL6OEz45UpmclFwiW19cT4ljlAhqiYG9ayPYDZNkYRTfThjja37i7hgi9DCEQBc3v0hfiEWPru9kS2da6aBVmKnK9/2AduTNfFgAPpmien1TtwNGZ43hk/5IExm8PJRHEoDbIP5OgM/d1RAGt+VKSBlKFNEZXE00AAA=";
+document.querySelectorAll("[data-remi-logo]").forEach(img => img.src = REMI_LOGO);
+
+const chat=document.getElementById("chat");
+const question=document.getElementById("question");
+const send=document.getElementById("send");
+
+function addMessage(text,type){
+  const empty=document.getElementById("empty");
+  if(empty)empty.remove();
+  const row=document.createElement("div");
+  row.className="message "+type;
+  const avatar=document.createElement("div");
+  avatar.className="avatar";
+  avatar.textContent=type==="user"?"U":"R";
+  const bubble=document.createElement("div");
+  bubble.className="bubble";
+  bubble.textContent=text;
+  row.append(avatar,bubble);
+  chat.appendChild(row);
+  chat.scrollTop=chat.scrollHeight;
+  return bubble;
+}
+function choose(text){question.value=text;question.focus()}
+async function sendMessage(){
+  const text=question.value.trim();
+  if(!text||send.disabled)return;
+  addMessage(text,"user");question.value="";send.disabled=true;
+  const reply=addMessage("Remi AI is thinking...","bot");
+  try{
+    const response=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text})});
+    if(!response.ok)throw new Error("AI service unavailable");
+    const data=await response.json();
+    reply.textContent=data.reply||data.message||"No answer received.";
+  }catch(error){
+    reply.textContent="The website interface is ready, but the AI service is not connected. Connect a secure backend to activate real AI answers.";
+  }finally{send.disabled=false;question.focus()}
+}
+question.addEventListener("keydown",event=>{
+  if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();sendMessage()}
+});
+function newChat(){
+  chat.innerHTML='<div class="empty" id="empty"><strong>Your conversation starts here.</strong>Ask Remi AI anything you want.</div>';
+  question.value="";
+}
+function toggleImage(){
+  const panel=document.getElementById("imagePanel");
+  panel.style.display=panel.style.display==="block"?"none":"block";
+}
+async function generateImage(){
+  const prompt=document.getElementById("imagePrompt").value.trim();
+  const result=document.getElementById("imageResult");
+  if(!prompt){result.textContent="Please describe your image first.";return}
+  result.textContent="Creating your image...";
+  try{
+    const response=await fetch("/api/images",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt})});
+    if(!response.ok)throw new Error("Image service unavailable");
+    const data=await response.json();
+    if(data.url){
+      const image=document.createElement("img");
+      image.src=data.url;image.alt="Remi AI generated image";
+      result.replaceChildren(image);
+    }else{result.textContent="No image was returned."}
+  }catch(error){
+    result.textContent="Image generation needs a connected backend. Keep your API key securely on the server.";
+  }
+}
+</script>
+</body>
+</html>
